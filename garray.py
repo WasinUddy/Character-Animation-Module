@@ -15,6 +15,7 @@ class GArray:
         """
         self.load_map(game_map)    # Load the game map from the file Generate self.data, self.width, self.height
 
+
     def load_map(self, game_map: str):
         """
         Load the game map from the file
@@ -60,6 +61,41 @@ class GArray:
                     self.data[y][x] = Tiles(gmap[f"{x};{y}"]["0"][0])       # Select only the first layer of the tile will FIX LATER
                 else:
                     self.data[y][x] = Tiles("VOID")
+
+    
+    def ripple(self, pos: tuple):
+        """
+        Activate surrounding tiles of the given position similar to a ripple effect
+
+        Args:
+            pos (tuple): The position of the tile to be activated
+        """
+
+        # Activate side function of the tile of all 4 surrounding tiles
+        x, y = pos
+        if x > 0:
+            self.data[y][x-1].side()
+        if x < self.width - 1:
+            self.data[y][x+1].side()
+        if y > 0:
+            self.data[y-1][x].side()
+        if y < self.height - 1:
+            self.data[y+1][x].side()
+
+        # Activate custom function of the tile of all 4 surrounding tiles
+        if x > 0:
+            self.data[y][x-1].up()
+        if x < self.width - 1:
+            self.data[y][x+1].down()
+        if y > 0: 
+            self.data[y-1][x].left()
+        if y < self.height - 1:
+            self.data[y+1][x].right()
+        
+        # Activate custom function of the tile of the given position
+        self.data[y][x].here()
+
+
         
 
         

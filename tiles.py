@@ -41,6 +41,11 @@ class Tiles:
         """
         pass
 
+    def here(self):
+        """
+        The effect of the tile when the character is on the tile.
+        """
+        pass
     
     def side(self):
         """
