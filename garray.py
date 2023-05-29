@@ -7,6 +7,7 @@ class GArray:
     Game Array class to handle 2D game events and manipulations before being used for rendering.
     """
 
+    tile_path = {}  # The path of the tile images
     def __init__(self, game_map_file: str):
         """
         Initialize the GArray instance.
@@ -26,8 +27,8 @@ class GArray:
         with open(game_map_file, "r") as f:
             data = json.load(f)
 
-        gmap = data.get("map", {})
-        # tile_paths = data.get("tile_path", {})
+        gmap = data.get("map", {})                      # Get the map data from the file
+        GArray.tile_path = data.get("tile_path", {})    # Get the tile path data from the file
 
         max_x = max_y = 0
         for key in gmap:
