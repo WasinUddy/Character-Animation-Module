@@ -1,7 +1,7 @@
 import json
 import pygame as pg
 
-class CharacterTiles:
+class CharacterSprite:
     """
     A class to store the tiles and be queried for the character.
     """
@@ -32,7 +32,7 @@ class CharacterTiles:
         for key, tile_path_list in data.items():
             self.tiles[key] = []
             for tile_path in tile_path_list:
-                tile = pg.image.load(tile_path).convert()
+                tile = pg.image.load(tile_path)
                 tile = pg.transform.scale(tile, self.target_size)
                 self.tiles[key].append(tile)
         
@@ -44,7 +44,7 @@ class CharacterTiles:
             self.counter_n = -1
         self.counter_n += 1
         
-    def idle(self):
+    def idle(self, direction: str = "S"):
         """
         Return the idle tile of the character.
 
@@ -52,7 +52,7 @@ class CharacterTiles:
             pygame.Surface: The idle tile of the character.
         """
         self.counter_update()
-        return self.tiles["idle"][self.counter_n % len(self.tiles["idle"])]
+        return self.tiles[f"idle_{direction}"][self.counter_n % len(self.tiles[f"idle_{direction}"])]
     
     def walk(self, direction: str):
         """
@@ -68,45 +68,6 @@ class CharacterTiles:
         return self.tiles[f"walk_{direction}"][self.counter_n % len(self.tiles[f"walk_{direction}"])]
 
 
-if __name__ == "__main__":
-    pg.init()
-    font = pg.font.Font(None, 30)
-    screen = pg.display.set_mode((400, 400))
-    pg.display.set_caption("Character Animation Test")
-    clock = pg.time.Clock()
-
-    character = CharacterTiles(path_to_tiles="sprites.json", target_size=(300, 300))
-    tile = character.idle()
-    running = True
-    walk = False
-    while running:
-        for event in pg.event.get():
-            if event.type == pg.QUIT:
-                running = False
-            elif event.type == pg.KEYDOWN:
-                if event.key == pg.K_w:
-                    walk = True
-            elif event.type == pg.KEYUP:
-                if event.key == pg.K_w:
-                    tile = character.idle()
-                    walk = False
-
-        if walk:
-            tile = character.walk("E")
-        else:
-            tile = character.idle()
-        
-        screen.fill((0, 0, 0))
-        screen.blit(tile, (50, 0))
-
-        # Show key press status
-        
-        text = font.render(f"Walk: {walk}", True, (255, 255, 255))
-        screen.blit(text, (0, 0))
-
-
-        pg.display.flip()
-        clock.tick(16)
 
 
     

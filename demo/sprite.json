@@ -1,0 +1,42 @@
+{
+    "idle_S":[
+        "demo\\sprite12.png"
+    ],
+
+    "idle_N":[
+        "demo\\sprite0.png"
+    ],
+
+    "idle_E":[
+        "demo\\sprite4.png"
+    ],
+
+    "idle_W":[
+        "demo\\sprite8.png"
+    ],
+
+    "walk_S":[
+        "demo\\sprite13.png",
+        "demo\\sprite14.png",
+        "demo\\sprite15.png"
+    ],
+
+    "walk_N":[
+        "demo\\sprite1.png",
+        "demo\\sprite2.png",
+        "demo\\sprite3.png"
+    ],
+
+    "walk_E":[
+        "demo\\sprite5.png",
+        "demo\\sprite6.png",
+        "demo\\sprite7.png"
+    ],
+
+    "walk_W":[
+        "demo\\sprite9.png",
+        "demo\\sprite10.png",
+        "demo\\sprite11.png"
+    ]
+
+}
